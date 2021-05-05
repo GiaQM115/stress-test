@@ -13,9 +13,9 @@ if len(sys.argv) != 3:
 bad_ip = sys.argv[1]
 bad_host = sys.argv[2]
 
-c = 1
+c = 0
 
-while c == 1:
+while True:
 	# benign web traffic
 	print("Benign traffic")
 	req.get("https://gamesgames.com")
@@ -37,22 +37,22 @@ while c == 1:
 	# malicious remote file download
 	print("EICAR 1-4")
 	try:
-		e1 = req.get("https://secure.eiccar.org/eicar.com")
+		e1 = req.get("https://secure.eicar.org/eicar.com")
 		open('eicar.com', 'wb').write(e1.content)
 	except:
 		print("Couldn't reach network")
 	try:
-		e2 = req.get("https://secure.eiccar.org/eicar.com.txt")
+		e2 = req.get("https://secure.eicar.org/eicar.com.txt")
 		open('eicar.com.txt', 'wb').write(e2.content)
 	except:
 		print("Couldn't reach network")
 	try:
-		e3 = req.get("https://secure.eiccar.org/eicar_com.zip")
+		e3 = req.get("https://secure.eicar.org/eicar_com.zip")
 		open('eicar_com.zip', 'wb').write(e3.content)
 	except:
 		print("Couldn't reach network")
 	try:
-		e4 = req.get("https://secure.eiccar.org/eicarcom2.zip")
+		e4 = req.get("https://secure.eicar.org/eicarcom2.zip")
 		open('eicarcom2.zip', 'wb').write(e4.content)
 	except:
 		print("Couldn't reach network")
@@ -71,4 +71,4 @@ while c == 1:
 	print("Zip transfers")
 	scp.put('eicar_com.zip', f'bad_file_{uuid}')
 	scp.put('test.zip', f'test_zip_{uuid}')
-	c = 0
+	c += 1
